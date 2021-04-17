@@ -26,7 +26,8 @@ class CheckInCrudController extends AbstractCrudController
         ];
 
         if ($pageName == Crud::PAGE_INDEX || $pageName == Crud::PAGE_DETAIL) {
-            $fields[] = DateTimeField::new('createdAt', 'Date début');
+            $fields[] = DateTimeField::new('createdAt', 'Date début')
+                ->setFormat('dd-MM-y');
         }
 
         return $fields;

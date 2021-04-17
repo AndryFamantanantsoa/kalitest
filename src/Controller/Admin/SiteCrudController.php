@@ -45,7 +45,8 @@ class SiteCrudController extends AbstractCrudController
         return [
             TextField::new('name', 'Nom'),
             TextField::new('address', 'Adresse'),
-            DateTimeField::new('startAt', 'Date de début'),
+            DateTimeField::new('startAt', 'Date de début')
+                ->setFormat('dd-MM-y'),
         ];
     }
 
