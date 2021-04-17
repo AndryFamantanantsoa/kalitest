@@ -20,16 +20,24 @@ class CheckInCrudController extends AbstractCrudController
     public function configureFields(string $pageName): iterable
     {
         $fields = [
-            TextField::new('duration'),
-            AssociationField::new('user'),
-            AssociationField::new('site'),
+            TextField::new('duration', 'Durée'),
+            AssociationField::new('user', 'Utilisateur'),
+            AssociationField::new('site', 'Chantier'),
         ];
 
         if ($pageName == Crud::PAGE_INDEX || $pageName == Crud::PAGE_DETAIL) {
-            $fields[] = DateTimeField::new('createdAt');
+            $fields[] = DateTimeField::new('createdAt', 'Date début');
         }
 
         return $fields;
+    }
+
+    public function configureCrud(Crud $crud): Crud
+    {
+        return $crud
+            ->setEntityLabelInSingular('Pointage')
+            ->setEntityLabelInPlural('Pointages')
+            ;
     }
 
 }
