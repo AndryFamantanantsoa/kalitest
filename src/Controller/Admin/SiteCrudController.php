@@ -9,6 +9,8 @@ use EasyCorp\Bundle\EasyAdminBundle\Config\Actions;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Crud;
 use EasyCorp\Bundle\EasyAdminBundle\Config\KeyValueStore;
 use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractCrudController;
+use EasyCorp\Bundle\EasyAdminBundle\Field\DateTimeField;
+use EasyCorp\Bundle\EasyAdminBundle\Field\TextField;
 
 class SiteCrudController extends AbstractCrudController
 {
@@ -38,10 +40,22 @@ class SiteCrudController extends AbstractCrudController
         return $responseParameters;
     }
 
+    public function configureFields(string $pageName): iterable
+    {
+        return [
+            TextField::new('name', 'Nom'),
+            TextField::new('address', 'Adresse'),
+            DateTimeField::new('startAt', 'Date de début'),
+        ];
+    }
+
     public function configureCrud(Crud $crud): Crud
     {
         return $crud
-            ->overrideTemplate('crud/detail', 'admin/site/detail.html.twig');
+            ->overrideTemplate('crud/detail', 'admin/site/detail.html.twig')
+            ->setEntityLabelInSingular('Chantier')
+            ->setEntityLabelInPlural('Chantiers')
+            ;
     }
 
     public function configureActions(Actions $actions): Actions
